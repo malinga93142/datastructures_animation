@@ -1,4 +1,4 @@
-# Data Structures Animations
+# Data Structures And Algorithms Animations
 This repository is a collection of animations and resources designed to help students and educators understand fundamental data structures. The materials herein are contributed by the University of San Francisco and their talented team.
 
 ## Acknowledgements
