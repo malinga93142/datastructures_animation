@@ -6,9 +6,14 @@ The resources are designed for use in computer science courses, workshops, and s
 
 All animations and resources are contributed by the University of San Francisco and are intended to advance open education and promote excellence in computer science instruction.
 
+
 ## Acknowledgements
 Special thanks to the University of San Francisco and their dedicated team for generously contributing these invaluable resources. Your commitment to open education and advancing computer science understanding is deeply appreciated.
 
+## About Me
+Hi! I'm MA-RK, the maintainer and curator of this repository. I am currently pursuing an M.Sc. in Computer Science at the Central University of Tamil Nadu. My passion lies in making computer science concepts accessible and engaging for learners of all levels. I believe that visualizing data structures and algorithms is a powerful way to deepen understanding and spark curiosity.
+
+I am committed to expanding and improving this collection, and I welcome contributions, feedback, and collaboration from educators, students, and enthusiasts worldwide. If you have suggestions or would like to get involved, please feel free to reach out!
 ## License
 All credits for this repository go to the University of San Francisco.
 
