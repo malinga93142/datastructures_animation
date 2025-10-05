@@ -1,4 +1,5 @@
-// Animation logic for Singly Linked List: Insert at beginning and end
+// Singly Linked List Animation: Insert at Beginning and End
+// For malinga93142/datastructures_animation
 
 function LinkedListAnim(am) {
     this.init(am);
@@ -8,14 +9,16 @@ LinkedListAnim.prototype = new Algorithm();
 LinkedListAnim.prototype.constructor = LinkedListAnim;
 LinkedListAnim.superclass = Algorithm.prototype;
 
-var LINKED_LIST_ELEM_WIDTH = 80;
-var LINKED_LIST_ELEM_HEIGHT = 40;
-var LINKED_LIST_START_X = 200;
-var LINKED_LIST_START_Y = 200;
-var LINKED_LIST_SPACING = 100;
+// Layout constants
+var LL_ELEM_WIDTH = 80;
+var LL_ELEM_HEIGHT = 40;
+var LL_START_X = 200;
+var LL_START_Y = 200;
+var LL_SPACING = 100;
 
 LinkedListAnim.prototype.init = function(am) {
     LinkedListAnim.superclass.init.call(this, am);
+
     this.addControls();
     this.reset();
 };
@@ -38,7 +41,9 @@ LinkedListAnim.prototype.reset = function() {
     this.nodeIDs = [];
     this.nextIndex = 0;
     this.headID = this.nextIndex++;
-    this.cmd("CreateLabel", this.headID, "Head", LINKED_LIST_START_X - 40, LINKED_LIST_START_Y);
+    this.cmd("CreateLabel", this.headID, "Head", LL_START_X - 40, LL_START_Y);
+    this.cmd("SetNull", this.headID, 1);
+    this.doAnimation();
 };
 
 LinkedListAnim.prototype.insertAtBeginningCallback = function() {
@@ -76,22 +81,23 @@ LinkedListAnim.prototype.doInsertAtBeginning = function(value) {
     this.list.unshift(value);
     this.nodeIDs.unshift(nodeID);
 
-    var x = LINKED_LIST_START_X;
-    var y = LINKED_LIST_START_Y;
+    var x = LL_START_X;
+    var y = LL_START_Y;
 
-    this.cmd("CreateLinkedList", nodeID, value, LINKED_LIST_ELEM_WIDTH, LINKED_LIST_ELEM_HEIGHT, x, y, 0.25, 0, 1, 1);
+    this.cmd("CreateLinkedList", nodeID, value, LL_ELEM_WIDTH, LL_ELEM_HEIGHT, x, y, 0.25, 0, 1, 1);
     this.cmd("SetNull", nodeID, 1);
 
     if (this.nodeIDs.length > 1) {
+        // Connect new node to previous head
         this.cmd("Connect", nodeID, this.nodeIDs[1]);
         this.cmd("SetNull", nodeID, 0);
     }
     this.cmd("Connect", this.headID, nodeID);
     this.cmd("SetNull", this.headID, 0);
 
-    // Reposition all nodes
+    // Animate reposition of all nodes
     for (var i = 0; i < this.nodeIDs.length; i++) {
-        this.cmd("Move", this.nodeIDs[i], LINKED_LIST_START_X + i * LINKED_LIST_SPACING, LINKED_LIST_START_Y);
+        this.cmd("Move", this.nodeIDs[i], LL_START_X + i * LL_SPACING, LL_START_Y);
     }
     this.cmd("Step");
     this.doAnimation();
@@ -103,13 +109,14 @@ LinkedListAnim.prototype.doInsertAtEnd = function(value) {
     this.list.push(value);
     this.nodeIDs.push(nodeID);
 
-    var x = LINKED_LIST_START_X + (this.nodeIDs.length - 1) * LINKED_LIST_SPACING;
-    var y = LINKED_LIST_START_Y;
+    var x = LL_START_X + (this.nodeIDs.length - 1) * LL_SPACING;
+    var y = LL_START_Y;
 
-    this.cmd("CreateLinkedList", nodeID, value, LINKED_LIST_ELEM_WIDTH, LINKED_LIST_ELEM_HEIGHT, x, y, 0.25, 0, 1, 1);
+    this.cmd("CreateLinkedList", nodeID, value, LL_ELEM_WIDTH, LL_ELEM_HEIGHT, x, y, 0.25, 0, 1, 1);
     this.cmd("SetNull", nodeID, 1);
 
     if (this.nodeIDs.length > 1) {
+        // Connect previous tail to new node
         this.cmd("Connect", this.nodeIDs[this.nodeIDs.length - 2], nodeID);
         this.cmd("SetNull", this.nodeIDs[this.nodeIDs.length - 2], 0);
     }
@@ -125,6 +132,7 @@ LinkedListAnim.prototype.doAnimation = function() {
     this.commands = [];
 };
 
+// Global for visualization main
 var currentAlg;
 
 function init() {
